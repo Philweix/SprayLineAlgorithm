@@ -17,7 +17,6 @@
     import { RGBELoader } from './js/RGBELoader.js';
 
     let camera, scene, renderer, object, object1, robotPosition1, robotPosition2, robot1, robot2, controlsOne;
-    let oldValue = 13;
 
     const clipPlanes = [
         new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), -13 ),
@@ -29,19 +28,12 @@
     render();
 
     function init() {
-
         const container = document.createElement( 'div' );
         document.body.appendChild( container );
-
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 100000 );
         camera.position.set( 14, -20, 10 );
         camera.up.set(0,0,1);
-
         scene = new THREE.Scene();
-        // scene.background = new THREE.Color(0xEEEEEE, 1.0);
-
-
-
         window.scene = scene;
 
         new RGBELoader()
@@ -54,9 +46,6 @@
 
                 loadLeePerrySmith();
             } );
-
-        // let AxisHelper = new THREE.AxisHelper(10);
-        // scene.add(AxisHelper);
 
         renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setPixelRatio( window.devicePixelRatio );
@@ -72,12 +61,6 @@
         controls.maxDistance = 10000;
         controls.target.set( 0, 0, - 0.2 );
         controls.update();
-
-        // const helpers = new THREE.Group();
-        // helpers.add( new THREE.PlaneHelper( clipPlanes[ 0 ], 10, 0xff0000 ) );
-        // helpers.add( new THREE.PlaneHelper( clipPlanes[ 1 ], 10, 0x00ff00 ) );
-        // helpers.visible = true;
-        // scene.add( helpers );
 
         window.addEventListener( 'resize', onWindowResize );
 
@@ -105,7 +88,6 @@
                     for ( const model in modelListUse ) {
                         modelListUse[model] = getObjectByName(model);
                     }
-                    console.log(modelListUse);
                     object = modelListUse['CRRC_Spray_Move'].children[0].children[15];
                     object.material.clippingPlanes = [ clipPlanes[1] ];
 
@@ -114,21 +96,11 @@
                     object1.material.color.setRGB( 0.01, 0.199, 0.22 );
                     object1.material.clippingPlanes = [ clipPlanes[0] ];
                     modelListUse['CRRC_Spray_Move'].children[0].add( object1 );
-
                     robot1 = modelListUse['CRRC_Spray_Car01'].children[32];
                     robot2 = modelListUse['CRRC_Spray_Car02'].children[32];
-
                     robotPosition1 = modelListUse['CRRC_Spray_Car01'].children[32].position.x;
                     robotPosition2 = modelListUse['CRRC_Spray_Car02'].children[32].position.x;
-
-                    // 转换成世界坐标
-                    console.log(9999, robot1.getWorldPosition( new THREE.Vector3() ) );
-
                     controlsOne = robot1.material.color.getStyle();
-
-                    window.object = object;
-                    window.object1 = object1;
-                    console.log( object1.material.color.getStyle() )
 
                     const gui = new GUI();
                     const params = {
