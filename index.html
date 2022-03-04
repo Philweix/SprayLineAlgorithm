@@ -17,11 +17,9 @@
     import { RGBELoader } from './js/RGBELoader.js';
 
     let camera, scene, renderer, object, object1, robotPosition1, robotPosition2, robot1, robot2, controlsOne;
-
     const clipPlanes = [
         new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), -13 ),
         new THREE.Plane( new THREE.Vector3( - 1, 0, 0 ), 13 ),
-
     ];
 
     init();
@@ -60,16 +58,13 @@
         controls.minDistance = 2;
         controls.maxDistance = 10000;
         controls.target.set( 0, 0, - 0.2 );
-        controls.update();
-
+        controls.update()
         window.addEventListener( 'resize', onWindowResize );
 
     }
 
     function loadLeePerrySmith() {
-
         const loader = new GLTFLoader();
-
         let flag = 0;
         let modelListUse = {
             'CRRC_Spray_Move': null,
@@ -128,13 +123,9 @@
                     gui.addColor(params, 'carAfter').onChange(function (e) {
                         object1.material.color.setStyle(e);
                     });
-
                 }
-
             } );
         }
-
-
     }
 
     function getObjectByName(name){
@@ -150,8 +141,6 @@
         camera.updateProjectionMatrix();
         renderer.setSize( window.innerWidth, window.innerHeight );
     }
-
-    //
 
     function render() {
         requestAnimationFrame( render );
